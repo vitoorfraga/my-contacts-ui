@@ -13,7 +13,8 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background-color: ${({ theme }) => theme.backgroundColor};
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({theme}) => theme.colors.gray[900]};
   }
 
   button {
