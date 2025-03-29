@@ -3,11 +3,13 @@ import { Card, Container, Header, InputSearchContainer, ListContainer } from "..
 import { LucideArrowUp } from "lucide-react"
 import { LucideTrash } from "lucide-react"
 import { Link } from "react-router-dom"
+import { Modal } from "../../components/Modal"
 
 
 export default function Home() {
   return  (
     <Container>
+      <Modal danger />
       <InputSearchContainer>
         <input placeholder="Pesquisar contato"/>
       </InputSearchContainer>

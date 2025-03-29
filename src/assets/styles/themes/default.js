@@ -10,6 +10,11 @@ export const defaultTheme = {
     gray: {
       900: "#222222",
       200: "#BCBCBC"
+    },
+    danger: {
+      main: "#f22424",
+      light: "#f75c5c",
+      dark: "#f21313"
     }
   }
 }

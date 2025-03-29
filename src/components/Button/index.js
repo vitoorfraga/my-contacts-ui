@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Button = styled.button`
 
-  width: 100%;
+  padding: 0 16px;
   height: 52px;
 
   border: none;
@@ -28,4 +28,18 @@ export const Button = styled.button`
     background-color: #CCC;
     cursor: not-allowed;
   }
+
+  ${({theme, danger}) => danger && css`
+    background: ${theme.colors.danger.main};
+
+    &:hover {
+      background-color: ${theme.colors.danger.light};
+      /* background-color: green; */
+    }
+
+    &:active {
+      background-color: ${theme.colors.danger.dark};
+    }
+
+  `}
 `
