@@ -2,6 +2,7 @@ import { LucideEdit } from "lucide-react"
 import { Card, Container, Header, InputSearchContainer, ListContainer } from "../../pages/Home/styles"
 import { LucideArrowUp } from "lucide-react"
 import { LucideTrash } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
     <Header>
       <strong> 3 Contatos </strong>
 
-      <a href="">Novo Contato</a>
+      <Link to="/new">Novo Contato</Link>
     </Header>
 
     <ListContainer>
@@ -37,9 +38,9 @@ export default function Home() {
         </div>
 
         <div className="actions">
-          <a href="">
+          <Link to="/edit/123">
             <LucideEdit />
-          </a>
+          </Link>
 
           <button>
             <LucideTrash />
