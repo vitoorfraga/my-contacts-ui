@@ -17,6 +17,8 @@ export const Input =  styled.input`
 
   border: 2px solid transparent;
 
+  width: 100%;
+
   &:focus {
     border: 2px solid ${({theme}) => theme.colors.primary.main};
   }
