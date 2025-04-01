@@ -4,12 +4,14 @@ import { LucideArrowUp } from "lucide-react"
 import { LucideTrash } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Modal } from "../../components/Modal"
+import { Loader } from "../../components/Loader"
 
 
 export default function Home() {
   return  (
     <Container>
-      <Modal danger />
+      {/* <Modal danger /> */}
+      <Loader />
       <InputSearchContainer>
         <input placeholder="Pesquisar contato"/>
       </InputSearchContainer>
