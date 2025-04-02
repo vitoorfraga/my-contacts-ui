@@ -5,7 +5,7 @@ import { Overlay } from "./styles"
 export const Loader = () => {
   return createPortal(
     <Overlay>
-      Carregando
+      <div className="loader" />
     </Overlay>, 
     document.getElementById("loader-root")
   )
