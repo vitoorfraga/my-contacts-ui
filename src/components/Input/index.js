@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Input =  styled.input`
+export const Input = styled.input`
   background-color: red;
 
-  background-color: #FFF;
+  background-color: #fff;
   height: 52px;
   box-shadow: 0px, 4px, 10px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
@@ -20,6 +20,13 @@ export const Input =  styled.input`
   width: 100%;
 
   &:focus {
-    border: 2px solid ${({theme}) => theme.colors.primary.main};
+    border: 2px solid ${({ theme }) => theme.colors.primary.main};
   }
-`
+
+  ${({ theme, error }) =>
+    error &&
+    css`
+      color: ${theme.colors.danger.main};
+      border-color: ${theme.colors.danger.main};
+    `}
+`;

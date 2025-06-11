@@ -1,99 +1,103 @@
-import { LucideEdit } from "lucide-react"
-import { Card, Container, Header, InputSearchContainer, ListContainer } from "../../pages/Home/styles"
-import { LucideArrowUp } from "lucide-react"
-import { LucideTrash } from "lucide-react"
-import { Link } from "react-router-dom"
-import { Modal } from "../../components/Modal"
-import { Loader } from "../../components/Loader"
-
+import { LucideEdit } from "lucide-react";
+import {
+  Card,
+  Container,
+  Header,
+  InputSearchContainer,
+  ListContainer,
+} from "../../pages/Home/styles";
+import { LucideArrowUp } from "lucide-react";
+import { LucideTrash } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Modal } from "../../components/Modal";
+import { Loader } from "../../components/Loader";
 
 export default function Home() {
-  return  (
+  return (
     <Container>
       {/* <Modal danger /> */}
-      <Loader />
+      {/* <Loader /> */}
       <InputSearchContainer>
-        <input placeholder="Pesquisar contato"/>
+        <input placeholder="Pesquisar contato" />
       </InputSearchContainer>
-      
-    <Header>
-      <strong> 3 Contatos </strong>
 
-      <Link to="/new">Novo Contato</Link>
-    </Header>
+      <Header>
+        <strong> 3 Contatos </strong>
 
-    <ListContainer>
-      <header>
-        <button type="button">
-          Nome
-          <LucideArrowUp />
-        </button>
-      </header>
+        <Link to="/new">Novo Contato</Link>
+      </Header>
 
-
-      <Card>
-        <div className="info">
-          <div className="contact-name">
-            <strong>Vitor Fraga</strong>
-            <small>instagram</small>
-          </div>
-          <span>vitor@gmail.com</span>
-          <span>11970435347</span>
-        </div>
-
-        <div className="actions">
-          <Link to="/edit/123">
-            <LucideEdit />
-          </Link>
-
-          <button>
-            <LucideTrash />
+      <ListContainer>
+        <header>
+          <button type="button">
+            Nome
+            <LucideArrowUp />
           </button>
-        </div>
-      </Card>
+        </header>
 
-      <Card>
-        <div className="info">
-          <div className="contact-name">
-            <strong>Vitor Fraga</strong>
-            <small>instagram</small>
+        <Card>
+          <div className="info">
+            <div className="contact-name">
+              <strong>Vitor Fraga</strong>
+              <small>instagram</small>
+            </div>
+            <span>vitor@gmail.com</span>
+            <span>11970435347</span>
           </div>
-          <span>vitor@gmail.com</span>
-          <span>11970435347</span>
-        </div>
 
-        <div className="actions">
-          <a href="">
-            <LucideEdit />
-          </a>
+          <div className="actions">
+            <Link to="/edit/123">
+              <LucideEdit />
+            </Link>
 
-          <button>
-            <LucideTrash />
-          </button>
-        </div>
-      </Card>
-
-      <Card>
-        <div className="info">
-          <div className="contact-name">
-            <strong>Vitor Fraga</strong>
-            <small>instagram</small>
+            <button>
+              <LucideTrash />
+            </button>
           </div>
-          <span>vitor@gmail.com</span>
-          <span>11970435347</span>
-        </div>
+        </Card>
 
-        <div className="actions">
-          <a href="">
-            <LucideEdit />
-          </a>
+        <Card>
+          <div className="info">
+            <div className="contact-name">
+              <strong>Vitor Fraga</strong>
+              <small>instagram</small>
+            </div>
+            <span>vitor@gmail.com</span>
+            <span>11970435347</span>
+          </div>
 
-          <button>
-            <LucideTrash />
-          </button>
-        </div>
-      </Card>
-    </ListContainer>
-  </Container>
-  )
+          <div className="actions">
+            <a href="">
+              <LucideEdit />
+            </a>
+
+            <button>
+              <LucideTrash />
+            </button>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="info">
+            <div className="contact-name">
+              <strong>Vitor Fraga</strong>
+              <small>instagram</small>
+            </div>
+            <span>vitor@gmail.com</span>
+            <span>11970435347</span>
+          </div>
+
+          <div className="actions">
+            <a href="">
+              <LucideEdit />
+            </a>
+
+            <button>
+              <LucideTrash />
+            </button>
+          </div>
+        </Card>
+      </ListContainer>
+    </Container>
+  );
 }
