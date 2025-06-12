@@ -17,6 +17,8 @@ export const ContactForm = ({ buttonLabel }) => {
 
   const { addError, removeError, errors, getErrorMessageByName } = useErrors();
 
+  const isFormValid = name && errors.length === 0;
+
   const handleNameChange = (event) => {
     setName(event.target.value);
     if (!event.target.value) {
@@ -72,7 +74,7 @@ export const ContactForm = ({ buttonLabel }) => {
     <Form onSubmit={handleSubmit}>
       <FormGroup error={getErrorMessageByName("name")}>
         <Input
-          placeholder="Nome"
+          placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
           error={getErrorMessageByName("name")}
@@ -108,7 +110,7 @@ export const ContactForm = ({ buttonLabel }) => {
       </FormGroup>
 
       <ButtonContainer>
-        <Button>{buttonLabel}</Button>
+        <Button disabled={!isFormValid}>{buttonLabel}</Button>
       </ButtonContainer>
     </Form>
   );
