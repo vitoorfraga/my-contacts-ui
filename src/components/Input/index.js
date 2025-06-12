@@ -28,5 +28,9 @@ export const Input = styled.input`
     css`
       color: ${theme.colors.danger.main};
       border-color: ${theme.colors.danger.main};
+
+      &&:focus {
+        border-color: ${theme.colors.danger.main};
+      }
     `}
 `;
