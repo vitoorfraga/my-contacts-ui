@@ -7,6 +7,7 @@ import { ButtonContainer, Form } from "./styles";
 import PropTypes from "prop-types";
 import { isEmailValid } from "../../utils/isEmailValid";
 import { useErrors } from "../../hooks/useErrors";
+import { formatPhone } from "../../utils/formatPhone";
 
 export const ContactForm = ({ buttonLabel }) => {
   const [name, setName] = useState("");
@@ -45,7 +46,9 @@ export const ContactForm = ({ buttonLabel }) => {
     }
   };
 
-  const handlePhoneChange = (event) => setPhone(event.target.value);
+  const handlePhoneChange = (event) => {
+    setPhone(formatPhone(event.target.value));
+  };
 
   const handleOptionChange = (event) => {
     setOption(event.target.value);
@@ -82,6 +85,7 @@ export const ContactForm = ({ buttonLabel }) => {
           error={!!getErrorMessageByName("email")}
           value={email}
           onChange={handleEmailChange}
+          type="email"
         />
       </FormGroup>
 
@@ -90,6 +94,7 @@ export const ContactForm = ({ buttonLabel }) => {
           placeholder="Telefone"
           value={phone}
           onChange={handlePhoneChange}
+          maxLength={15}
         />
       </FormGroup>
 
