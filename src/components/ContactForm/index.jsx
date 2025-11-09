@@ -67,11 +67,11 @@ export const ContactForm = ({ buttonLabel }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aqui você pode adicionar a lógica para enviar os dados do formulário
-    console.log("Formulário enviado:", { name, email, phone, option });
+    console.log("Formulário enviado:", { name, email, phone: phone.replace(/\D/g, ""), option });
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate={false}>
       <FormGroup error={getErrorMessageByName("name")}>
         <Input
           placeholder="Nome *"
@@ -88,6 +88,7 @@ export const ContactForm = ({ buttonLabel }) => {
           value={email}
           onChange={handleEmailChange}
           type="email"
+          maxLength={15}
         />
       </FormGroup>
 

@@ -98,6 +98,9 @@ export default function Home() {
           </div>
         </Card>
       </ListContainer>
+
+      {/* <Modal danger /> */}
+      {/* <Loader /> */}
     </Container>
   );
 }
