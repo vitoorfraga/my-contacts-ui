@@ -40,6 +40,7 @@ export default function Home() {
       try {
 
         const contactsResponse = await ContactsService.listContacts(orderBy)
+        console.log(contactsResponse)
         setContacts(contactsResponse);
 
       } catch (error) {
