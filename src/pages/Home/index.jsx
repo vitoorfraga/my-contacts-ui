@@ -7,7 +7,6 @@ import {
   ListContainer,
   ListHeader,
 } from "../../pages/Home/styles";
-import { LucideArrowUp } from "lucide-react";
 import { LucideTrash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -15,7 +14,7 @@ import { useState } from "react";
 import { LucideArrowDown } from "lucide-react";
 import { useMemo } from "react";
 import { Loader } from "../../components/Loader";
-import { delay } from "../../utils/delay";
+import ContactsService from "../../services/ContactsService";
 
 export default function Home() {
 
@@ -39,13 +38,10 @@ export default function Home() {
     const loadContacts = async () => {
 
       try {
-        const response = await fetch(`http://localhost:3000/contacts?orderBy=${orderBy}`);
 
-        await delay(1000);
+        const contactsResponse = await ContactsService.listContacts(orderBy)
+        setContacts(contactsResponse);
 
-        const data = await response.json();
-
-        setContacts(data);
       } catch (error) {
         console.log(error)
       } finally {
