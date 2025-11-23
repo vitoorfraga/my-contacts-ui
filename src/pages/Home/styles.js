@@ -8,9 +8,12 @@ export const Header = styled.header`
   
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ hasError }) => hasError ? 'flex-end' : 'space-between'};
 
   margin-top: 32px;
+
+  padding-bottom: 16px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray[100]};
 
 
   strong {
@@ -127,3 +130,24 @@ export const InputSearchContainer = styled.div`
     }
   }
 `;
+
+export const ErrorContainer = styled.div`
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    margin-right: 24px;
+  }
+
+  .details {
+    
+    strong {      
+      font-size: 22px;
+      color: ${({ theme }) => theme.colors.danger.main};
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+  }
+  `
