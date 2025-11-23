@@ -151,4 +151,16 @@ export const ErrorContainer = styled.div`
     }
     
   }
-  `
+`
+
+export const EmptyListContainer = styled.div`
+  margin-top: 16px;
+
+  p {
+    color: ${({ theme }) => theme.colors.gray[200]};
+  }
+
+  strong {
+    color: ${({ theme }) => theme.colors.primary.main};
+  }
+`

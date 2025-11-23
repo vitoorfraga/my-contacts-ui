@@ -2,6 +2,7 @@ import { LucideEdit } from "lucide-react";
 import {
   Card,
   Container,
+  EmptyListContainer,
   ErrorContainer,
   Header,
   InputSearchContainer,
@@ -18,6 +19,7 @@ import { Loader } from "../../components/Loader";
 import ContactsService from "../../services/ContactsService";
 import { Frown } from "lucide-react";
 import { Button } from "../../components/Button";
+import { useCallback } from "react";
 
 
 export default function Home() {
@@ -36,7 +38,7 @@ export default function Home() {
 
 
 
-  const loadContacts = async () => {
+  const loadContacts = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -52,13 +54,11 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [orderBy]);
 
   useEffect(() => {
-
-
     loadContacts()
-  }, [orderBy]);
+  }, [orderBy, loadContacts]);
 
   const handleToggleOrderBy = () => {
     setOrderBy((prevOrderBy) => (prevOrderBy === "asc" ? "desc" : "asc"));
@@ -69,7 +69,6 @@ export default function Home() {
     setSearchTerm(searchTerm);
   }
 
-  console.log(filteredContacts)
 
   return (
     <Container>
@@ -79,7 +78,7 @@ export default function Home() {
 
       <Header hasError={hasError}>
         {
-          !hasError && (
+          (!hasError && contacts.length > 0) && (
             <strong>
               {filteredContacts.length}{" "}
               {filteredContacts.length === 1 ? 'Contato' : 'Contatos'}
@@ -104,6 +103,12 @@ export default function Home() {
 
       {!hasError && (
         <ListContainer>
+          {(contacts.length < 1 && !isLoading) && (
+            <EmptyListContainer>
+
+              <p>Você ainda não tem nenhum contato cadastrado! Clique no botão <strong>"Novo contato"</strong> à cima para cadastrar o seu primeiro!</p>
+            </EmptyListContainer>
+          )}
           {filteredContacts.length > 0 && (
             <ListHeader orderBy={orderBy}>
               <button type="button" onClick={handleToggleOrderBy}>
