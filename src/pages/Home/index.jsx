@@ -36,25 +36,26 @@ export default function Home() {
 
 
 
-  useEffect(() => {
-
+  const loadContacts = async () => {
     setIsLoading(true);
 
-    const loadContacts = async () => {
+    try {
 
-      try {
+      const contactsResponse = await ContactsService.listContacts(orderBy)
 
-        const contactsResponse = await ContactsService.listContacts(orderBy)
-        console.log(contactsResponse)
-        setContacts(contactsResponse);
+      setHasError(false);
+      setContacts(contactsResponse);
 
-      } catch (error) {
-        setHasError(true);
-        console.log(error)
-      } finally {
-        setIsLoading(false);
-      }
+    } catch (error) {
+      setHasError(true);
+      console.log(error)
+    } finally {
+      setIsLoading(false);
     }
+  }
+
+  useEffect(() => {
+
 
     loadContacts()
   }, [orderBy]);
@@ -95,48 +96,50 @@ export default function Home() {
 
           <div className="details">
             <strong className="error-msg">Ocorreu um erro ao obter os contatos!</strong>
-            <Button type="button">Tentar novamente</Button>
+            <Button type="button" onClick={loadContacts}>Tentar novamente</Button>
           </div>
 
         </ErrorContainer>
       )}
 
-      <ListContainer>
-        {filteredContacts.length > 0 && (
-          <ListHeader orderBy={orderBy}>
-            <button type="button" onClick={handleToggleOrderBy}>
-              Nome
-              <LucideArrowDown className="icon" />
-            </button>
-          </ListHeader>
-        )}
-
-        {filteredContacts.map((contact) => (
-          <Card key={contact.id}>
-            <div className="info">
-              <div className="contact-name">
-                <strong>{contact.name}</strong>
-                {contact.category_name && (
-                  <small>{contact.category_name}</small>
-                )}
-              </div>
-              <span>{contact.email}</span>
-              <span>{contact.phone}</span>
-            </div>
-
-            <div className="actions">
-              <Link to={`/edit/${contact.id}`}>
-                <LucideEdit />
-              </Link>
-
-              <button>
-                <LucideTrash />
+      {!hasError && (
+        <ListContainer>
+          {filteredContacts.length > 0 && (
+            <ListHeader orderBy={orderBy}>
+              <button type="button" onClick={handleToggleOrderBy}>
+                Nome
+                <LucideArrowDown className="icon" />
               </button>
-            </div>
-          </Card>
-        ))}
+            </ListHeader>
+          )}
 
-      </ListContainer>
+          {filteredContacts.map((contact) => (
+            <Card key={contact.id}>
+              <div className="info">
+                <div className="contact-name">
+                  <strong>{contact.name}</strong>
+                  {contact.category_name && (
+                    <small>{contact.category_name}</small>
+                  )}
+                </div>
+                <span>{contact.email}</span>
+                <span>{contact.phone}</span>
+              </div>
+
+              <div className="actions">
+                <Link to={`/edit/${contact.id}`}>
+                  <LucideEdit />
+                </Link>
+
+                <button>
+                  <LucideTrash />
+                </button>
+              </div>
+            </Card>
+          ))}
+
+        </ListContainer>
+      )}
 
       {/* <Modal danger /> */}
       <Loader isLoading={isLoading} />

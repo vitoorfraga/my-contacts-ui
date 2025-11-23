@@ -138,6 +138,7 @@ export const ErrorContainer = styled.div`
 
   .icon {
     margin-right: 24px;
+    color: ${({ theme }) => theme.colors.danger.main};
   }
 
   .details {
