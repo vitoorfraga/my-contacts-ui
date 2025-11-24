@@ -8,6 +8,7 @@ import {
   InputSearchContainer,
   ListContainer,
   ListHeader,
+  SearchNotFoundContainer,
 } from "../../pages/Home/styles";
 import { LucideTrash } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -20,6 +21,7 @@ import ContactsService from "../../services/ContactsService";
 import { Frown } from "lucide-react";
 import { Button } from "../../components/Button";
 import { useCallback } from "react";
+import { LucideSearchX } from "lucide-react";
 
 
 export default function Home() {
@@ -102,48 +104,62 @@ export default function Home() {
       )}
 
       {!hasError && (
-        <ListContainer>
-          {(contacts.length < 1 && !isLoading) && (
-            <EmptyListContainer>
+        <>
+          <ListContainer>
+            {(contacts.length < 1 && !isLoading) && (
+              <EmptyListContainer>
 
-              <p>Você ainda não tem nenhum contato cadastrado! Clique no botão <strong>"Novo contato"</strong> à cima para cadastrar o seu primeiro!</p>
-            </EmptyListContainer>
-          )}
-          {filteredContacts.length > 0 && (
-            <ListHeader orderBy={orderBy}>
-              <button type="button" onClick={handleToggleOrderBy}>
-                Nome
-                <LucideArrowDown className="icon" />
-              </button>
-            </ListHeader>
-          )}
-
-          {filteredContacts.map((contact) => (
-            <Card key={contact.id}>
-              <div className="info">
-                <div className="contact-name">
-                  <strong>{contact.name}</strong>
-                  {contact.category_name && (
-                    <small>{contact.category_name}</small>
-                  )}
-                </div>
-                <span>{contact.email}</span>
-                <span>{contact.phone}</span>
-              </div>
-
-              <div className="actions">
-                <Link to={`/edit/${contact.id}`}>
-                  <LucideEdit />
-                </Link>
-
-                <button>
-                  <LucideTrash />
+                <p>Você ainda não tem nenhum contato cadastrado! Clique no botão <strong>"Novo contato"</strong> à cima para cadastrar o seu primeiro!</p>
+              </EmptyListContainer>
+            )}
+            {filteredContacts.length > 0 && (
+              <ListHeader orderBy={orderBy}>
+                <button type="button" onClick={handleToggleOrderBy}>
+                  Nome
+                  <LucideArrowDown className="icon" />
                 </button>
-              </div>
-            </Card>
-          ))}
+              </ListHeader>
+            )}
 
-        </ListContainer>
+            {filteredContacts.map((contact) => (
+              <Card key={contact.id}>
+                <div className="info">
+                  <div className="contact-name">
+                    <strong>{contact.name}</strong>
+                    {contact.category_name && (
+                      <small>{contact.category_name}</small>
+                    )}
+                  </div>
+                  <span>{contact.email}</span>
+                  <span>{contact.phone}</span>
+                </div>
+
+                <div className="actions">
+                  <Link to={`/edit/${contact.id}`}>
+                    <LucideEdit />
+                  </Link>
+
+                  <button>
+                    <LucideTrash />
+                  </button>
+                </div>
+              </Card>
+            ))}
+
+          </ListContainer>
+
+
+          {(contacts.length > 0 && filteredContacts.length < 1) && (
+            <SearchNotFoundContainer>
+              <div>
+                <LucideSearchX size={34} />
+
+              </div>
+              <p>Nenhum resultado foi encontrado para <strong>{searchTerm}</strong></p>
+            </SearchNotFoundContainer>
+
+          )}
+        </>
       )}
 
       {/* <Modal danger /> */}
