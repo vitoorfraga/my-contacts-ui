@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../Button";
 import { FormGroup } from "../FormGroup";
 import { Input } from "../Input";
@@ -8,12 +8,15 @@ import PropTypes from "prop-types";
 import { isEmailValid } from "../../utils/isEmailValid";
 import { useErrors } from "../../hooks/useErrors";
 import { formatPhone } from "../../utils/formatPhone";
+import CategoriesService from "../../services/CategoriesService";
 
 export const ContactForm = ({ buttonLabel }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [option, setOption] = useState("");
+
+  const [categories, setCategories] = useState([]);
 
   const { addError, removeError, errors, getErrorMessageByName } = useErrors();
 
@@ -54,21 +57,30 @@ export const ContactForm = ({ buttonLabel }) => {
 
   const handleOptionChange = (event) => {
     setOption(event.target.value);
-    if (!event.target.value) {
-      addError({
-        field: "option",
-        message: "A opção é obrigatória.",
-      });
-    } else {
-      removeError("option");
-    }
   };
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aqui você pode adicionar a lógica para enviar os dados do formulário
     console.log("Formulário enviado:", { name, email, phone: phone.replace(/\D/g, ""), option });
   };
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const categoriesResonse = await CategoriesService.listCategories();
+        setCategories(categoriesResonse);
+        console.log(categoriesResonse);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadCategories();
+  }, [])
+
 
   return (
     <Form onSubmit={handleSubmit} noValidate={false}>
@@ -103,10 +115,12 @@ export const ContactForm = ({ buttonLabel }) => {
 
       <FormGroup error={getErrorMessageByName("option")}>
         <Select placeholder="Nome" value={option} onChange={handleOptionChange}>
-          <option value="1">Categoria</option>
-          <option value="2">Instagram</option>
-          <option value="3">Facebook</option>
-          <option value="4">Discord</option>
+          <option value="">Sem categoria</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
 
