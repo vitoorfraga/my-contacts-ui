@@ -73,8 +73,8 @@ export const ContactForm = ({ buttonLabel }) => {
         const categoriesResonse = await CategoriesService.listCategories();
         setCategories(categoriesResonse);
         console.log(categoriesResonse);
-      } catch (error) {
-        console.error(error);
+      } catch {
+        //
       }
     }
 
@@ -113,8 +113,8 @@ export const ContactForm = ({ buttonLabel }) => {
         />
       </FormGroup>
 
-      <FormGroup error={getErrorMessageByName("option")}>
-        <Select placeholder="Nome" value={option} onChange={handleOptionChange}>
+      <FormGroup>
+        <Select placeholder="Nome" value={option} onChange={handleOptionChange} disabled={categories.length === 0}>
           <option value="">Sem categoria</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
