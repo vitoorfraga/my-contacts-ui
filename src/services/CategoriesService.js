@@ -6,7 +6,7 @@ class CategoriesService {
   }
 
   async listCategories() {
-    const categories = await this.httpClient.get("/categories");
+    const categories = await this.httpClient.get("/catdsadasegories");
     return categories;
   }
 }
